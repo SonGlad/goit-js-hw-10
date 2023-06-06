@@ -70,19 +70,9 @@ function addListOfCatsToSelect(cats){
         optionEl.textContent = cat.name;
         refs.selectEl.append(optionEl);
         selectData.push({text: cat.name, value: cat.id});
-        // value = cat.id;
-        // textContent = cat.name;
     });
     select.setData(selectData);
 }; 
-
-// //////////////////
-// Используем этот тип подключения в переменную SelectEl без плагтна SlimSelect
-// const optionEl = document.createElement('option');
-// optionEl.value = cat.id;
-// optionEl.textContent = cat.name;
-// refs.selectEl.append(optionEl);
-// //////////////////
 
 
 function handleCatSelect() {
