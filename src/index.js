@@ -41,7 +41,7 @@ function hideLoader(){
 };
 function notiflixCallErrorMessage(){
     const errorMessage = refs.errorMsgEl.textContent;
-    // Notiflix.Report.warning(`${errorMessage}`);
+    Notiflix.Report.warning(`${errorMessage}`);
     Notiflix.Notify.warning(`${errorMessage}`);
 };
 function resetContent(){
@@ -65,9 +65,13 @@ fetchBreeds()
 
 function addListOfCatsToSelect(cats){
     cats.forEach((cat) => {
-        value = cat.id;
-        textContent = cat.name;
+        const optionEl = document.createElement('option');
+        optionEl.value = cat.id;
+        optionEl.textContent = cat.name;
+        refs.selectEl.append(optionEl);
         selectData.push({text: cat.name, value: cat.id});
+        // value = cat.id;
+        // textContent = cat.name;
     });
     select.setData(selectData);
 }; 
