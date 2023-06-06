@@ -26,7 +26,6 @@ refs.selectEl.addEventListener('change', handleCatSelect)
 
 refs.errorMsgEl.style.display = "none";
 refs.loadingMsgEl.style.display = "none";
-refs.loadingMsgEl.textContent = ''
 
 const errorMessage = refs.errorMsgEl.textContent;
 let isFirstLoad = true;
