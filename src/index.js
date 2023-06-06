@@ -41,7 +41,7 @@ function hideLoader(){
 };
 function notiflixCallErrorMessage(){
     const errorMessage = refs.errorMsgEl.textContent;
-    Notiflix.Report.warning(`${errorMessage}`);
+    // Notiflix.Report.warning(`${errorMessage}`);
     Notiflix.Notify.warning(`${errorMessage}`);
 };
 function resetContent(){
