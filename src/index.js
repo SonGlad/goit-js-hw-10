@@ -19,7 +19,11 @@ const refs = {
     loadingMsgEl: document.querySelector(".loader"),
     errorMsgEl: document.querySelector(".error"),
     divEl: document.querySelector(".cat-info"),
+    slimSelectDivEl: document.querySelector(".ss-main"), 
 };
+
+refs.slimSelectDivEl.classList.add('is-hidden')
+refs.loadingMsgEl.style.display = "none";
 
 let isFirstLoad = true;
 
@@ -27,43 +31,54 @@ let isFirstLoad = true;
 refs.selectEl.addEventListener('change', handleCatSelect);
 
 
-refs.errorMsgEl.style.display = "none";
-refs.loadingMsgEl.style.display = "none";
-
-
 function showLoader(){
     refs.loadingMsgEl.style.display = "block";
 };
 function hideLoader(){
     refs.loadingMsgEl.style.display = "none";
+    refs.slimSelectDivEl.classList.remove('is-hidden');
+    refs.selectEl.classList.remove('hidden');
 };
 function notiflixCallErrorMessage(){
     const errorMessage = refs.errorMsgEl.textContent;
-    Notiflix.Notify.warning(`${errorMessage}`); 
+    Notiflix.Report.warning(`${errorMessage}`);
+    Notiflix.Notify.warning(`${errorMessage}`);
+};
+function resetContent(){
+    refs.divEl.innerHTML = '';
 };
 
 
 showLoader();
 fetchBreeds()
     .then((cats) => {
-        hideLoader()
         addListOfCatsToSelect(cats);
+        hideLoader()
     })
-    .catch(() => {
-        notiflixCallErrorMessage() 
+    .catch((error) => {
+        hideLoader(); 
+        notiflixCallErrorMessage();
+        console.error('Error fetching breeds:', error);
+        throw error;
     });
 
 
 function addListOfCatsToSelect(cats){
     cats.forEach((cat) => {
+        value = cat.id;
+        textContent = cat.name;
         selectData.push({text: cat.name, value: cat.id});
-        const optionEl = document.createElement('option');
-        optionEl.value = cat.id;
-        optionEl.textContent = cat.name;
-        refs.selectEl.append(optionEl);
     });
     select.setData(selectData);
 }; 
+
+// //////////////////
+// Используем этот тип подключения в переменную SelectEl без плагтна SlimSelect
+// const optionEl = document.createElement('option');
+// optionEl.value = cat.id;
+// optionEl.textContent = cat.name;
+// refs.selectEl.append(optionEl);
+// //////////////////
 
 
 function handleCatSelect() {
@@ -72,16 +87,20 @@ function handleCatSelect() {
         return;
     };
     const breedId = this.value;
-    showLoader()
+    showLoader();
+    resetContent();
     fetchCatByBreed(breedId)
         .then((catData) => {
-            hideLoader();
             const creatContent = createCatElements(catData);
             refs.divEl.innerHTML = creatContent;
+            hideLoader();
         })
         .catch(() => {
-            notiflixCallErrorMessage()
-            refs.divEl.innerHTML = '';
+            hideLoader();
+            notiflixCallErrorMessage();
+            resetContent();
+            console.error('Error fetching breeds:', error);
+            throw error;
         });
 };
 

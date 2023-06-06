@@ -20,13 +20,19 @@ img {
   height: auto;
 }
 
+.is-hidden {
+  visibility: hidden;
+}
+.hidden {
+  display: none;
+};
+
 .cat_container {
   background-color: aliceblue;
   width: 800px;
   border-radius: 4px;
   color: #212121;
   margin: auto;
-  margin-top: 130px;
   box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
 }
 
