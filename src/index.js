@@ -21,14 +21,14 @@ const refs = {
     divEl: document.querySelector(".cat-info"),
 };
 
+let isFirstLoad = true;
 
-refs.selectEl.addEventListener('change', handleCatSelect)
+
+refs.selectEl.addEventListener('change', handleCatSelect);
+
 
 refs.errorMsgEl.style.display = "none";
 refs.loadingMsgEl.style.display = "none";
-
-const errorMessage = refs.errorMsgEl.textContent;
-let isFirstLoad = true;
 
 
 function showLoader(){
@@ -38,6 +38,7 @@ function hideLoader(){
     refs.loadingMsgEl.style.display = "none";
 };
 function notiflixCallErrorMessage(){
+    const errorMessage = refs.errorMsgEl.textContent;
     Notiflix.Notify.failure(`${errorMessage}`); 
 };
 
