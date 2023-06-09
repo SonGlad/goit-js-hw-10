@@ -20,7 +20,6 @@ const refs = {
     errorMsgEl: document.querySelector(".error"),
     divEl: document.querySelector(".cat-info"),
     slimSelectDivEl: document.querySelector(".ss-main"),
-    slimSelectMainEl: document.querySelector(".breed-select"),  
 };
 
 refs.slimSelectDivEl.classList.add('is-hidden');
@@ -59,7 +58,7 @@ fetchBreeds()
     .catch((error) => {
         hideLoader(); 
         notiflixCallErrorMessage();
-        refs.slimSelectMainEl.classList.add('is-hidden');
+        refs.selectEl.classList.add('is-hidden');
         console.error('Error fetching breeds:', error);
         throw error;
     });
